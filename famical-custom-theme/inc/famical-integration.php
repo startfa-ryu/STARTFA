@@ -29,7 +29,7 @@ function famical_tools() {
 			'title'    => __( 'คำนวณภาษีและสิทธิลดหย่อนของคุณ', 'famical' ),
 			'text'     => __( 'ใส่รายได้แล้วดูทันทีว่าต้องเสียภาษีเท่าไหร่ และควรลดหย่อนด้วยอะไรให้คุ้มที่สุด', 'famical' ),
 			'keywords' => array( 'ภาษี', 'ลดหย่อน', 'tax', 'ssf', 'rmf', 'thaiesg', 'ยื่นภาษี' ),
-			'path'     => '',
+			'path'     => 'tax', // หน้า Tax Cal ที่ใช้งานจริงใน FAmiCal
 		),
 		'insurance' => array(
 			'name'     => 'Value Ensure',

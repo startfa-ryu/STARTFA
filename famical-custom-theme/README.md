@@ -73,3 +73,10 @@
 - วางกล่องกลางบทความเองด้วย shortcode: `[famical_cta]`, `[famical_cta tool="tax"]`, `[famical_cta tool="kids" style="slim"]`
 - หน้าหมวดหมู่ที่ตรงกับเครื่องมือจะมีแถบชวนใช้ใต้ชื่อหมวด
 - ถ้า FAmiCal รองรับลิงก์ตรงไปแต่ละเครื่องมือ (เช่น `/tax-shield`) แก้ค่า `path` ใน `inc/famical-integration.php`
+
+## เครื่องคิดภาษีย่อ → FAmiCal (v1.3.0)
+- shortcode `[famical_tax_calc]`: กรอกเงินเดือน/เดือน เห็นภาษีโดยประมาณทันที แล้วกดไปวางแผนต่อใน FAmiCal
+- บทความหมวดภาษีจะแสดงเครื่องคิดนี้ท้ายบทความอัตโนมัติ (ถ้าในบทความยังไม่ได้วาง shortcode เอง)
+- ส่งไปที่ `https://famical.startfa.com/tax?salary=<เงินเดือน>&utm_...`
+  ฝั่ง FAmiCal อ่านค่าใน `src/lib/startfaPrefill.ts` (repo startfamical) — ถ้าเปลี่ยนชื่อ `salary` ต้องแก้ทั้งสองฝั่ง
+- ตัวเลขบน startfa.com เป็นประมาณการ (หักค่าใช้จ่าย 50% ไม่เกิน 100,000, ส่วนตัว 60,000, ประกันสังคม) ตัวเลขจริงคำนวณใน FAmiCal

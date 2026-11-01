@@ -59,7 +59,13 @@ get_header();
 
 							<?php
 							// กล่องชวนใช้เครื่องมือ FAmiCal ที่ตรงกับเนื้อหาบทความ (เลือกอัตโนมัติจากหมวดหมู่/แท็ก)
-							echo famical_get_tool_cta( famical_match_tool(), 'single-post', 'card' ); // phpcs:ignore WordPress.Security.EscapeOutput
+							$famical_tool = famical_match_tool();
+							if ( 'tax' === $famical_tool && false === strpos( get_post_field( 'post_content', get_the_ID() ), '[famical_tax_calc' ) ) {
+								// บทความภาษี: ใช้เครื่องคิดภาษีย่อ (กรอกเงินเดือนแล้วส่งต่อไป FAmiCal) แทนกล่องธรรมดา
+								echo famical_tax_calc_html( 'single-post' ); // phpcs:ignore WordPress.Security.EscapeOutput
+							} else {
+								echo famical_get_tool_cta( $famical_tool, 'single-post', 'card' ); // phpcs:ignore WordPress.Security.EscapeOutput
+							}
 
 							famical_ad_slot( 'ad-after-content' );
 							?>

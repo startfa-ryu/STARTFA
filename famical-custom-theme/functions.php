@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAMICAL_THEME_VERSION', '1.2.0' );
+define( 'FAMICAL_THEME_VERSION', '1.3.0' );
 
 /* -------------------------------------------------------------------------
  * 1) Theme setup
@@ -384,3 +384,4 @@ add_filter( 'excerpt_more', 'famical_excerpt_more' );
  * ---------------------------------------------------------------------- */
 require_once get_template_directory() . '/inc/ads.php';
 require_once get_template_directory() . '/inc/famical-integration.php';
+require_once get_template_directory() . '/inc/tax-calc.php';
