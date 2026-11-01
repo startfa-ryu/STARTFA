@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAMICAL_THEME_VERSION', '1.0.0' );
+define( 'FAMICAL_THEME_VERSION', '1.0.1' );
 
 /* -------------------------------------------------------------------------
  * 1) Theme setup
@@ -43,6 +43,11 @@ function famical_setup() {
 	// ขนาดรูปสำหรับการ์ดบทความหน้าแรก (16:9)
 	add_image_size( 'famical-card', 640, 360, true );
 
+	// ใช้หน้าจัดการวิดเจ็ตแบบคลาสสิก (เหมือนธีมเดิม)
+	// ตัวแก้วิดเจ็ตแบบบล็อกใน Customizer ชนกับปลั๊กอินบางตัวบนเว็บนี้ จนเกิด critical error
+	// "wp_print_media_templates not found" ตอนกด Live Preview
+	remove_theme_support( 'widgets-block-editor' );
+
 	register_nav_menus(
 		array(
 			'primary' => __( 'เมนูหลัก (Header)', 'famical' ),
@@ -56,6 +61,18 @@ function famical_content_width() {
 	$GLOBALS['content_width'] = 760;
 }
 add_action( 'after_setup_theme', 'famical_content_width', 0 );
+
+/**
+ * กันพลาดอีกชั้น: ถ้ามีปลั๊กอินเรียก wp_print_media_templates() ใน Customizer
+ * ก่อนที่ WordPress จะโหลดไฟล์ที่มีฟังก์ชันนี้ ให้โหลดไฟล์นั้นไว้ล่วงหน้า
+ */
+function famical_load_media_templates() {
+	if ( ! function_exists( 'wp_print_media_templates' ) ) {
+		require_once ABSPATH . WPINC . '/media-template.php';
+	}
+}
+add_action( 'customize_controls_init', 'famical_load_media_templates' );
+add_action( 'load-widgets.php', 'famical_load_media_templates' );
 
 /* -------------------------------------------------------------------------
  * 2) Widgets (sidebar บทความ + footer)
