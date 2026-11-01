@@ -57,15 +57,12 @@ get_header();
 						<footer class="entry-footer">
 							<?php the_tags( '<div class="tag-list">', '', '</div>' ); ?>
 
-							<?php famical_ad_slot( 'ad-after-content' ); ?>
+							<?php
+							// กล่องชวนใช้เครื่องมือ FAmiCal ที่ตรงกับเนื้อหาบทความ (เลือกอัตโนมัติจากหมวดหมู่/แท็ก)
+							echo famical_get_tool_cta( famical_match_tool(), 'single-post', 'card' ); // phpcs:ignore WordPress.Security.EscapeOutput
 
-							<aside class="inline-cta">
-								<div>
-									<strong><?php esc_html_e( 'อยากวางแผนเรื่องนี้ด้วยตัวเอง?', 'famical' ); ?></strong>
-									<p><?php esc_html_e( 'ลองใช้เครื่องมือคำนวณใน FAmiCal ฟรี เห็นตัวเลขจริงของคุณภายในไม่กี่นาที', 'famical' ); ?></p>
-								</div>
-								<a class="btn btn-primary" href="<?php echo esc_url( famical_app_url( 'single-post' ) ); ?>"><?php echo esc_html( famical_mod( 'hero_cta_text' ) ); ?></a>
-							</aside>
+							famical_ad_slot( 'ad-after-content' );
+							?>
 
 							<?php
 							the_post_navigation(
@@ -104,6 +101,7 @@ get_header();
 				<?php elseif ( is_archive() ) : ?>
 					<?php the_archive_title( '<h1 class="archive-title">', '</h1>' ); ?>
 					<?php the_archive_description( '<div class="archive-description">', '</div>' ); ?>
+					<?php famical_archive_tool_cta(); ?>
 				<?php else : ?>
 					<h1 class="archive-title"><?php esc_html_e( 'บทความทั้งหมด', 'famical' ); ?></h1>
 				<?php endif; ?>
@@ -112,9 +110,15 @@ get_header();
 			<?php if ( have_posts() ) : ?>
 				<div class="grid grid-2">
 					<?php
+					$famical_card_index = 0;
 					while ( have_posts() ) :
 						the_post();
 						get_template_part( 'template-parts/content', 'card' );
+						$famical_card_index++;
+						// โฆษณา 1 ช่องหลังการ์ดใบที่ 4 (เต็มความกว้าง ดีไซน์เข้ากับการ์ด)
+						if ( 4 === $famical_card_index && $wp_query->post_count > 4 ) {
+							famical_ad_slot( 'ad-archive-feed', 'ad-in-feed' );
+						}
 					endwhile;
 					?>
 				</div>
