@@ -208,6 +208,13 @@ $latest_posts = new WP_Query(
 </section>
 <?php endif; ?>
 
+<!-- ============ AD (ด้านล่างหน้าแรก) ============ -->
+<?php if ( is_active_sidebar( 'ad-home-bottom' ) ) : ?>
+<div class="container ad-home-wrap">
+	<?php famical_ad_slot( 'ad-home-bottom' ); ?>
+</div>
+<?php endif; ?>
+
 <?php
 // ถ้าตั้ง "หน้าแรก" เป็นหน้าคงที่ และหน้านั้นมีเนื้อหา ให้แสดงต่อท้าย (ใช้ใส่ข้อความ SEO เพิ่มเติมได้)
 if ( 'page' === get_option( 'show_on_front' ) && have_posts() ) :

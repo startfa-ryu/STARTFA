@@ -11,7 +11,7 @@
 get_header();
 ?>
 
-<div class="container content-area <?php echo is_active_sidebar( 'sidebar-1' ) && ! is_page() ? 'has-sidebar' : ''; ?>">
+<div class="container content-area <?php echo famical_has_sidebar() ? 'has-sidebar' : ''; ?>">
 	<div class="content-main">
 
 		<?php if ( is_singular() ) : ?>
@@ -56,6 +56,8 @@ get_header();
 					<?php if ( is_single() ) : ?>
 						<footer class="entry-footer">
 							<?php the_tags( '<div class="tag-list">', '', '</div>' ); ?>
+
+							<?php famical_ad_slot( 'ad-after-content' ); ?>
 
 							<aside class="inline-cta">
 								<div>
@@ -132,10 +134,15 @@ get_header();
 		<?php endif; ?>
 	</div>
 
-	<?php if ( is_active_sidebar( 'sidebar-1' ) && ! is_page() ) : ?>
-		<aside class="sidebar" aria-label="<?php esc_attr_e( 'แถบด้านข้าง', 'famical' ); ?>">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>
-		</aside>
+	<?php if ( famical_has_sidebar() ) : ?>
+		<div class="sidebar">
+			<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
+				<aside aria-label="<?php esc_attr_e( 'แถบด้านข้าง', 'famical' ); ?>">
+					<?php dynamic_sidebar( 'sidebar-1' ); ?>
+				</aside>
+			<?php endif; ?>
+			<?php famical_ad_slot( 'ad-sidebar-sticky', 'ad-sticky' ); ?>
+		</div>
 	<?php endif; ?>
 </div>
 

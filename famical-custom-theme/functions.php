@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAMICAL_THEME_VERSION', '1.0.1' );
+define( 'FAMICAL_THEME_VERSION', '1.1.0' );
 
 /* -------------------------------------------------------------------------
  * 1) Theme setup
@@ -106,6 +106,49 @@ function famical_widgets_init() {
 			)
 		)
 	);
+
+	// ช่องโฆษณา: ใส่โค้ด AdSense ผ่านวิดเจ็ต "HTML ที่กำหนดเอง" (Custom HTML)
+	$ad_areas = array(
+		'ad-home-bottom'    => array( __( 'โฆษณา: หน้าแรก (ด้านล่าง ก่อนส่วนท้าย)', 'famical' ), __( 'แสดงที่หน้าแรก ใต้รายการบทความ', 'famical' ) ),
+		'ad-after-content'  => array( __( 'โฆษณา: ใต้เนื้อหาบทความ', 'famical' ), __( 'แสดงท้ายบทความทุกเรื่อง ก่อนกล่องชวนใช้ FAmiCal', 'famical' ) ),
+		'ad-sidebar-sticky' => array( __( 'โฆษณา: Sidebar (ติดตามตอนเลื่อน)', 'famical' ), __( 'แสดงด้านข้างหน้าบทความบนคอมพิวเตอร์ และย้ายไปอยู่ใต้บทความบนมือถือ', 'famical' ) ),
+	);
+	foreach ( $ad_areas as $id => $info ) {
+		register_sidebar(
+			array(
+				'name'          => $info[0],
+				'id'            => $id,
+				'description'   => $info[1],
+				'before_widget' => '<div id="%1$s" class="ad-widget %2$s">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<span class="screen-reader-text">',
+				'after_title'   => '</span>',
+			)
+		);
+	}
+}
+
+/**
+ * แสดงช่องโฆษณา (ถ้ามีวิดเจ็ตอยู่ในช่องนั้น)
+ *
+ * @param string $area  id ของช่องโฆษณา
+ * @param string $class class เพิ่มเติม
+ */
+function famical_ad_slot( $area, $class = '' ) {
+	if ( ! is_active_sidebar( $area ) ) {
+		return;
+	}
+	echo '<aside class="ad-slot ' . esc_attr( $class ) . '" aria-label="' . esc_attr__( 'โฆษณา', 'famical' ) . '">';
+	echo '<span class="ad-label">' . esc_html__( 'โฆษณา', 'famical' ) . '</span>';
+	dynamic_sidebar( $area );
+	echo '</aside>';
+}
+
+/**
+ * มี sidebar หน้าบทความหรือไม่ (วิดเจ็ตปกติ หรือโฆษณา sidebar)
+ */
+function famical_has_sidebar() {
+	return ! is_page() && ( is_active_sidebar( 'sidebar-1' ) || is_active_sidebar( 'ad-sidebar-sticky' ) );
 }
 add_action( 'widgets_init', 'famical_widgets_init' );
 
