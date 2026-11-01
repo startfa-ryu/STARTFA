@@ -23,7 +23,9 @@
 		var annual = monthly * 12;
 		var expense = Math.min(annual * 0.5, 100000);
 		var personal = 60000;
-		var sso = Math.min(monthly, 15000) * 0.05 * 12;
+		// ประกันสังคม ม.33 ปี 2569–2571: ฐานค่าจ้างสูงสุด 17,500 = จ่ายสูงสุด 875/เดือน (10,500/ปี) ลดหย่อนตามที่จ่ายจริง
+		var SSO_WAGE_CAP = 17500;
+		var sso = Math.min(monthly, SSO_WAGE_CAP) * 0.05 * 12;
 		var net = Math.max(0, annual - expense - personal - sso);
 
 		var tax = 0, lower = 0, rate = 0;
