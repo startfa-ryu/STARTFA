@@ -26,6 +26,18 @@
 				<span class="logo-text"><?php bloginfo( 'name' ); ?></span>
 			</a>
 			<p><?php bloginfo( 'description' ); ?></p>
+			<?php
+			// ลิงก์ไปหน้า FA ใน FAmiCal จากทุกหน้าของ startfa.com: Google รู้จักเว็บนี้อยู่แล้ว
+			// ลิงก์ที่มีชื่อ + STARTFA ในข้อความช่วยให้หน้า FA ถูกค้นเจอเร็วขึ้น (ปรับได้ใน ปรับแต่ง > FAmiCal)
+			$famical_fa_url = famical_mod( 'fa_profile_url' );
+			if ( $famical_fa_url ) :
+				?>
+				<p class="footer-fa-link">
+					<a href="<?php echo esc_url( add_query_arg( array( 'utm_source' => 'startfa.com', 'utm_medium' => 'referral', 'utm_campaign' => 'landing', 'utm_content' => 'footer-fa' ), $famical_fa_url ) ); ?>">
+						<?php echo esc_html( famical_mod( 'fa_profile_label' ) ); ?> →
+					</a>
+				</p>
+			<?php endif; ?>
 		</div>
 
 		<nav class="footer-nav" aria-label="<?php esc_attr_e( 'เมนูส่วนท้าย', 'famical' ); ?>">

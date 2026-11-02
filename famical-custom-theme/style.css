@@ -4,7 +4,7 @@ Theme URI: https://startfa.com/
 Author: STARTFA
 Author URI: https://startfa.com/
 Description: ธีม Landing Page / Content Hub สำหรับ startfa.com เพื่อส่งทราฟิกไปยัง FAmiCal (famical.startfa.com) รองรับบทความเดิมและปลั๊กอิน SEO (Rank Math / Yoast) ครบถ้วน
-Version: 1.3.0
+Version: 1.4.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -455,6 +455,7 @@ input[type="text"], input[type="email"], input[type="url"], input[type="search"]
 .footer-cta p { margin: 0; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-top: 48px; padding-bottom: 32px; }
 .footer-about p { margin-top: 14px; font-size: .95rem; }
+.footer-fa-link a { color: var(--amber-400); font-weight: 600; }
 .footer-menu { list-style: none; margin: 0; padding: 0; }
 .footer-menu li { margin-bottom: 8px; }
 .site-footer a { color: rgba(255, 255, 255, .8); }

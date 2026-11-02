@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAMICAL_THEME_VERSION', '1.3.0' );
+define( 'FAMICAL_THEME_VERSION', '1.4.0' );
 
 /* -------------------------------------------------------------------------
  * 1) Theme setup
@@ -167,6 +167,8 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 function famical_defaults() {
 	return array(
 		'famical_url'        => 'https://famical.startfa.com/',
+		'fa_profile_url'     => 'https://famical.startfa.com/fa/ryu',
+		'fa_profile_label'   => 'ปรึกษาริว STARTFA ที่ปรึกษาการเงิน',
 		'header_cta_text'    => 'เปิด FAmiCal',
 		'hero_badge'         => 'ใช้งานฟรี · Beta Version',
 		'hero_title'         => 'วางแผนการเงินทั้งครอบครัว ครบในที่เดียว',
@@ -216,6 +218,8 @@ function famical_customize_register( $wp_customize ) {
 	$hero_fields = array(
 		'famical_url'     => array( __( 'URL ของ FAmiCal', 'famical' ), 'url' ),
 		'header_cta_text' => array( __( 'ข้อความปุ่มบน Header', 'famical' ), 'text' ),
+		'fa_profile_url'   => array( __( 'ลิงก์หน้า FA ของคุณใน FAmiCal (แสดงใน footer ทุกหน้า ช่วยให้ Google เจอหน้านี้)', 'famical' ), 'url' ),
+		'fa_profile_label' => array( __( 'ข้อความลิงก์หน้า FA (ใส่ชื่อ + STARTFA + อาชีพ)', 'famical' ), 'text' ),
 		'hero_badge'      => array( __( 'ป้ายเล็กเหนือพาดหัว', 'famical' ), 'text' ),
 		'hero_title'      => array( __( 'พาดหัวหลัก (H1)', 'famical' ), 'text' ),
 		'hero_subtitle'   => array( __( 'คำอธิบายใต้พาดหัว', 'famical' ), 'textarea' ),
