@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAMICAL_THEME_VERSION', '1.4.0' );
+define( 'FAMICAL_THEME_VERSION', '1.6.0' );
 
 /* -------------------------------------------------------------------------
  * 1) Theme setup
@@ -390,3 +390,5 @@ require_once get_template_directory() . '/inc/ads.php';
 require_once get_template_directory() . '/inc/famical-integration.php';
 require_once get_template_directory() . '/inc/tax-calc.php';
 require_once get_template_directory() . '/inc/og-image.php';
+require_once get_template_directory() . '/inc/buddy-chat.php';
+require_once get_template_directory() . '/inc/admin-bar-fix.php';

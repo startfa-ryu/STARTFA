@@ -85,6 +85,27 @@ $testimonials = famical_get_testimonials();
 	</div>
 </section>
 
+<!-- ============ จิ๋วแจ๋วออกแบบประกัน (จุดขายหลัก) ============ -->
+<section class="section buddy-design" id="design">
+	<div class="container buddy-design-inner">
+		<div>
+			<span class="eyebrow"><?php esc_html_e( 'ใหม่ · ฟรี · ไม่ต้องสมัคร', 'famical' ); ?></span>
+			<h2><?php esc_html_e( '🐱 ออกแบบประกันกับจิ๋วแจ๋ว ใน 2 นาที', 'famical' ); ?></h2>
+			<p><?php esc_html_e( 'บอกอายุ เป้าหมาย และงบต่อปี จิ๋วแจ๋วคำนวณจากอัตราเบี้ยจริงของบริษัท แล้วเสนอ 3 แผนที่คุ้มครองได้มากที่สุดในงบของคุณ', 'famical' ); ?></p>
+			<ol class="buddy-steps">
+				<li><?php esc_html_e( 'ตอบ 5 ข้อสั้นๆ (อายุ · เป้าหมาย · งบ · จ่ายกี่ปี · คุ้มครองถึงอายุ)', 'famical' ); ?></li>
+				<li><?php esc_html_e( 'ดู 3 แผนพร้อมชื่อแบบประกัน ทุน และเบี้ยต่อปี', 'famical' ); ?></li>
+				<li><?php esc_html_e( 'รู้ทันทีว่าต้องตรวจสุขภาพไหม และลดหย่อนภาษีได้เท่าไหร่', 'famical' ); ?></li>
+			</ol>
+			<a class="btn btn-primary btn-lg" href="<?php echo esc_url( famical_design_url( 'home-section' ) ); ?>">
+				<?php esc_html_e( 'เริ่มออกแบบประกัน', 'famical' ); ?>
+				<?php echo famical_icon( 'arrow' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			</a>
+			<p class="buddy-design-note"><?php esc_html_e( 'ข้อมูลเพื่อประกอบการตัดสินใจ ผลประโยชน์เป็นไปตามเงื่อนไขกรมธรรม์ · อยากให้ FA ตัวจริงช่วยดูต่อ กดได้ในหน้าผลลัพธ์', 'famical' ); ?></p>
+		</div>
+	</div>
+</section>
+
 <!-- ============ FEATURES ============ -->
 <section class="section features" id="features">
 	<div class="container">

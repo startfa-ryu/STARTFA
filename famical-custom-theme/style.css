@@ -4,7 +4,7 @@ Theme URI: https://startfa.com/
 Author: STARTFA
 Author URI: https://startfa.com/
 Description: ธีม Landing Page / Content Hub สำหรับ startfa.com เพื่อส่งทราฟิกไปยัง FAmiCal (famical.startfa.com) รองรับบทความเดิมและปลั๊กอิน SEO (Rank Math / Yoast) ครบถ้วน
-Version: 1.5.0
+Version: 1.6.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -517,3 +517,14 @@ input[type="text"], input[type="email"], input[type="url"], input[type="search"]
 	html { scroll-behavior: auto; }
 	*, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ==========================================================================
+   จิ๋วแจ๋วออกแบบประกัน (หน้าแรก)
+   ========================================================================== */
+.buddy-design { background: linear-gradient(135deg, var(--navy-800), var(--blue-600)); color: #fff; }
+.buddy-design-inner { max-width: 760px; }
+.buddy-design h2 { color: #fff; margin: .3em 0 .4em; }
+.buddy-design p { color: rgba(255, 255, 255, .88); }
+.buddy-design .eyebrow { color: var(--amber-400); }
+.buddy-steps { margin: 1em 0 1.4em; padding-left: 1.3em; line-height: 1.8; }
+.buddy-design-note { font-size: 13px; margin-top: 1em; opacity: .8; }
