@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAMICAL_THEME_VERSION', '1.8.0' );
+define( 'FAMICAL_THEME_VERSION', '1.9.0' );
 
 /* -------------------------------------------------------------------------
  * 1) Theme setup
@@ -393,3 +393,4 @@ require_once get_template_directory() . '/inc/og-image.php';
 require_once get_template_directory() . '/inc/buddy-chat.php';
 require_once get_template_directory() . '/inc/admin-bar-fix.php';
 require_once get_template_directory() . '/inc/security-hardening.php';
+require_once get_template_directory() . '/inc/share-buttons.php';

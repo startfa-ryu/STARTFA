@@ -55,6 +55,7 @@ get_header();
 
 					<?php if ( is_single() ) : ?>
 						<footer class="entry-footer">
+							<?php famical_share_buttons(); // ปุ่มแชร์ท้ายบทความ (inc/share-buttons.php) ?>
 							<?php the_tags( '<div class="tag-list">', '', '</div>' ); ?>
 
 							<?php
