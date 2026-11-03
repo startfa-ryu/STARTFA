@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAMICAL_THEME_VERSION', '1.6.0' );
+define( 'FAMICAL_THEME_VERSION', '1.7.0' );
 
 /* -------------------------------------------------------------------------
  * 1) Theme setup

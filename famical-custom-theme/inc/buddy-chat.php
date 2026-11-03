@@ -111,11 +111,13 @@ function famical_buddy_chat_render() {
 		return;
 	}
 	$line = get_theme_mod( 'buddy_line_url', '' );
+	$cat  = get_template_directory_uri() . '/assets/img/jijjaew.png';
+	$cat2 = get_template_directory_uri() . '/assets/img/jijjaew-happy.png';
 	?>
 	<div class="buddy-chat" id="buddy-chat">
 		<div class="buddy-panel" id="buddy-panel" role="dialog" aria-label="<?php esc_attr_e( 'แชทกับจิ๋วแจ๋ว', 'famical' ); ?>" hidden>
 			<div class="buddy-head">
-				<span class="buddy-avatar" aria-hidden="true">🐱</span>
+				<img class="buddy-avatar" src="<?php echo esc_url( $cat2 ); ?>" alt="" width="40" height="40" />
 				<span><strong><?php esc_html_e( 'จิ๋วแจ๋ว', 'famical' ); ?></strong><small><?php esc_html_e( 'ผู้ช่วยออกแบบประกันของ STARTFA', 'famical' ); ?></small></span>
 				<button type="button" class="buddy-close" data-buddy-close aria-label="<?php esc_attr_e( 'ปิด', 'famical' ); ?>">×</button>
 			</div>
@@ -136,19 +138,32 @@ function famical_buddy_chat_render() {
 			</div>
 			<p class="buddy-note"><?php esc_html_e( 'ข้อมูลทั่วไปเพื่อประกอบการตัดสินใจ ผลประโยชน์เป็นไปตามเงื่อนไขกรมธรรม์', 'famical' ); ?></p>
 		</div>
-		<button type="button" class="buddy-fab" id="buddy-fab" aria-expanded="false" aria-controls="buddy-panel">
-			<span aria-hidden="true">🐱</span> <?php esc_html_e( 'ถามจิ๋วแจ๋ว', 'famical' ); ?>
+		<p class="buddy-peek" id="buddy-peek" hidden><?php esc_html_e( 'มีคำถามเรื่องประกัน/ลดหย่อนภาษีไหมคะ? 🐾', 'famical' ); ?></p>
+		<button type="button" class="buddy-fab" id="buddy-fab" aria-expanded="false" aria-controls="buddy-panel" aria-label="<?php esc_attr_e( 'ถามจิ๋วแจ๋ว', 'famical' ); ?>">
+			<img src="<?php echo esc_url( $cat ); ?>" alt="" width="64" height="64" />
+			<span class="buddy-fab-label"><?php esc_html_e( 'ถามจิ๋วแจ๋ว', 'famical' ); ?></span>
 		</button>
 	</div>
 	<style id="famical-buddy-chat">
-		.buddy-chat { position: fixed; right: 16px; bottom: 16px; z-index: 9990; font-family: inherit; }
-		.buddy-fab { display: inline-flex; align-items: center; gap: 6px; border: 0; cursor: pointer; padding: 12px 18px; border-radius: 999px; background: var(--amber-400, #f7c04a); color: var(--navy-900, #0b1530); font: 600 15px/1 inherit; box-shadow: 0 8px 24px rgba(15, 26, 51, .25); }
-		.buddy-fab span { font-size: 20px; }
-		.buddy-panel { position: absolute; right: 0; bottom: 60px; width: min(360px, calc(100vw - 32px)); max-height: min(560px, calc(100vh - 100px)); display: flex; flex-direction: column; background: #fff; color: var(--ink, #0f1a33); border-radius: 16px; box-shadow: 0 16px 40px rgba(15, 26, 51, .25); overflow: hidden; }
+		/* ปุ่มลอยกลางขอบขวา (ระดับสายตา) · พื้นกรมท่า + ขอบทอง ให้แมวสีส้มเด่นไม่กลืน */
+		.buddy-chat { position: fixed; right: 12px; top: 58%; z-index: 9990; font-family: inherit; }
+		.buddy-fab { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; border: 0; background: none; padding: 0; cursor: pointer; animation: buddy-bob 3s ease-in-out infinite; }
+		.buddy-fab img { width: 64px; height: 64px; border-radius: 50%; background: var(--navy-800, #111d3d); border: 3px solid var(--amber-400, #f7c04a); box-shadow: 0 8px 22px rgba(15, 26, 51, .35); image-rendering: pixelated; object-fit: cover; }
+		.buddy-fab-label { background: #fff; color: var(--navy-900, #0b1530); font: 700 12px/1 inherit; padding: 5px 9px; border-radius: 999px; box-shadow: 0 3px 10px rgba(15, 26, 51, .2); white-space: nowrap; }
+		.buddy-fab::after { content: ""; position: absolute; top: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%; background: #ff4d4f; border: 2px solid #fff; }
+		.buddy-chat.is-seen .buddy-fab::after { display: none; }
+		.buddy-chat.is-open .buddy-fab, .buddy-chat.is-open .buddy-peek { display: none; }
+		.buddy-peek { position: absolute; right: 78px; top: 8px; width: max-content; max-width: 190px; margin: 0; background: #fff; color: var(--ink, #0f1a33); padding: 9px 12px; border-radius: 14px 14px 4px 14px; font-size: 13px; line-height: 1.45; box-shadow: 0 8px 22px rgba(15, 26, 51, .22); cursor: pointer; animation: buddy-pop .35s ease-out; }
+		.buddy-peek[hidden] { display: none; }
+		@keyframes buddy-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+		@keyframes buddy-pop { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
+		@media (prefers-reduced-motion: reduce) { .buddy-fab, .buddy-peek { animation: none; } }
+		.buddy-chat.is-open { top: auto; bottom: 16px; }
+		.buddy-panel { position: relative; width: min(360px, calc(100vw - 32px)); max-height: min(560px, calc(100vh - 100px)); display: flex; flex-direction: column; background: #fff; color: var(--ink, #0f1a33); border-radius: 16px; box-shadow: 0 16px 40px rgba(15, 26, 51, .25); overflow: hidden; }
 		.buddy-panel[hidden] { display: none; }
 		.buddy-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--navy-800, #111d3d); color: #fff; }
 		.buddy-head small { display: block; opacity: .75; font-size: 12px; }
-		.buddy-avatar { font-size: 26px; }
+		.buddy-avatar { width: 40px; height: 40px; border-radius: 50%; background: #fff; image-rendering: pixelated; }
 		.buddy-close { margin-left: auto; background: none; border: 0; color: #fff; font-size: 24px; cursor: pointer; line-height: 1; }
 		.buddy-log { padding: 12px 14px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 8px; }
 		.buddy-msg, .buddy-me { margin: 0; padding: 9px 12px; border-radius: 12px; font-size: 14px; line-height: 1.55; max-width: 90%; }
@@ -161,17 +176,34 @@ function famical_buddy_chat_render() {
 		.buddy-actions .btn { justify-content: center; text-align: center; }
 		.buddy-actions .btn-ghost { background: #06c755; color: #fff; border-color: #06c755; }
 		.buddy-note { margin: 0; padding: 0 14px 10px; font-size: 11px; color: var(--ink-soft, #4a5672); }
-		@media (max-width: 480px) { .buddy-chat { right: 12px; bottom: 12px; } .buddy-fab { padding: 10px 14px; } }
+		@media (max-width: 480px) { .buddy-chat { right: 8px; } .buddy-fab img { width: 56px; height: 56px; } .buddy-chat.is-open { right: 12px; bottom: 12px; } }
 		@media print { .buddy-chat { display: none; } }
 	</style>
 	<script>
 	( function () {
-		var fab = document.getElementById( 'buddy-fab' ), panel = document.getElementById( 'buddy-panel' ), log = document.getElementById( 'buddy-log' );
+		var root = document.getElementById( 'buddy-chat' ), fab = document.getElementById( 'buddy-fab' ), panel = document.getElementById( 'buddy-panel' ), log = document.getElementById( 'buddy-log' ), peek = document.getElementById( 'buddy-peek' );
 		if ( ! fab || ! panel ) { return; }
+		function store( k, v ) { try { if ( v === undefined ) { return window.sessionStorage.getItem( k ); } window.sessionStorage.setItem( k, v ); } catch ( e ) { return null; } }
+		if ( store( 'buddySeen' ) ) { root.classList.add( 'is-seen' ); }
 		function toggle( open ) {
 			panel.hidden = ! open;
+			root.classList.toggle( 'is-open', open );
 			fab.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+			if ( open ) { peek.hidden = true; root.classList.add( 'is-seen' ); store( 'buddySeen', '1' ); }
 		}
+		// ทักครั้งเดียวต่อการเข้าเว็บ: หลังอ่านไป 8 วินาที หรือเลื่อนลงเกิน 35% ของหน้า
+		var peeked = !! store( 'buddyPeeked' );
+		function showPeek() {
+			if ( peeked || ! panel.hidden ) { return; }
+			peeked = true; store( 'buddyPeeked', '1' ); peek.hidden = false;
+			setTimeout( function () { peek.hidden = true; }, 9000 );
+		}
+		setTimeout( showPeek, 8000 );
+		window.addEventListener( 'scroll', function () {
+			var h = document.documentElement.scrollHeight - window.innerHeight;
+			if ( h > 0 && window.scrollY / h > 0.35 ) { showPeek(); }
+		}, { passive: true } );
+		peek.addEventListener( 'click', function () { toggle( true ); } );
 		fab.addEventListener( 'click', function () { toggle( panel.hidden ); } );
 		panel.querySelector( '[data-buddy-close]' ).addEventListener( 'click', function () { toggle( false ); } );
 		document.addEventListener( 'keydown', function ( e ) { if ( 'Escape' === e.key ) { toggle( false ); } } );
