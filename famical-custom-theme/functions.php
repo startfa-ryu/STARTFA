@@ -389,3 +389,4 @@ add_filter( 'excerpt_more', 'famical_excerpt_more' );
 require_once get_template_directory() . '/inc/ads.php';
 require_once get_template_directory() . '/inc/famical-integration.php';
 require_once get_template_directory() . '/inc/tax-calc.php';
+require_once get_template_directory() . '/inc/og-image.php';
